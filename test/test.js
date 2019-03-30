@@ -1,8 +1,37 @@
 const test = require('tape');
 const {
+  getCurrentUrl,
   resolvePath,
   resolveUrl,
 } = require('..');
+
+test('test getCurrentUrl()', t => {
+  t.plan(2);
+
+  const url1 = getCurrentUrl({
+    path: '/test',
+    headers: {
+      Host: 'test.amazonaws.com',
+    },
+    requestContext: {
+      stage: 'Prod',
+    },
+  });
+
+  t.equal(url1, 'https://test.amazonaws.com/Prod/test');
+
+  const url2 = getCurrentUrl({
+    path: '/test',
+    headers: {
+      Host: 'example.com',
+    },
+    requestContext: {
+      stage: 'Prod',
+    },
+  });
+
+  t.equal(url2, 'https://example.com/test');
+});
 
 test('test resolvePath()', t => {
   t.plan(2);
