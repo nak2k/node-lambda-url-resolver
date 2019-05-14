@@ -2,6 +2,8 @@
 
 URL resolver for Lambda.
 
+In building the web site with API Gateway + Lambda, this package is useful that generates redirect URLs.
+
 ## Installation
 
 ```
