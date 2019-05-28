@@ -44,6 +44,10 @@ This function resolve a url and return an absolute url.
     - Otherwise, the base path is `/`.
   - Default: `{}`
 
+## Related
+
+- [pambda-redirect](https://github.com/pambda/pambda-redirect)
+
 ## License
 
 MIT
