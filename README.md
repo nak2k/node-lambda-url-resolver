@@ -12,6 +12,15 @@ npm i lambda-url-resolver
 
 ## API
 
+### getBasePath(event, options)
+
+This function returns a base path for an event.
+
+- `event`
+  - An event object of Lambda Proxy Integration.
+- `options.basePathMap`
+  - See `resolveUrl(url, event, options)`
+
 ### getCurrentUrl(event, options)
 
 This function is equivalent to `resolveUrl(event.path, event, options)`.
