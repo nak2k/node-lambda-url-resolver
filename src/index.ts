@@ -1,10 +1,20 @@
-const { get } = require('caseless-get');
+import { get } from 'caseless-get';
 
-function getCurrentUrl(event, options) {
+interface Event {
+  path: string;
+  headers: any;
+  requestContext: any;
+}
+
+interface Options {
+  basePathMap?: { [host: string]: string };
+}
+
+export function getCurrentUrl(event: Event, options: Options) {
   return resolveUrl(event.path, event, options);
 }
 
-function resolvePath(path, event, options) {
+export function resolvePath(path: string, event: Event, options: Options) {
   if (path.startsWith('//') || path.startsWith('http:') || path.startsWith('https:')) {
     return path;
   }
@@ -16,7 +26,7 @@ function resolvePath(path, event, options) {
   return getBasePath(event, options) + path;
 }
 
-function resolveUrl(url, event, options) {
+export function resolveUrl(url: string, event: Event, options: Options = {}) {
   if (url.startsWith('http:') || url.startsWith('https:')) {
     return url;
   }
@@ -38,7 +48,7 @@ function resolveUrl(url, event, options) {
   return `https://${host}` + getBasePath(event, options) + url;
 }
 
-function getBasePath(event, options = {}) {
+export function getBasePath(event: Event, options: Options = {}) {
   const {
     basePathMap = {},
   } = options;
@@ -54,11 +64,3 @@ function getBasePath(event, options = {}) {
     return '/';
   }
 }
-
-/*
- * Exports.
- */
-exports.getBasePath = getBasePath;
-exports.getCurrentUrl = getCurrentUrl;
-exports.resolvePath = resolvePath;
-exports.resolveUrl = resolveUrl;
