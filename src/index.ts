@@ -1,9 +1,12 @@
 import { get } from 'caseless-get';
 
 interface Event {
-  path: string;
+  path?: string;
+  rawPath?: string;
   headers: any;
-  requestContext: any;
+  requestContext: {
+    stage: string;
+  };
 }
 
 interface Options {
@@ -11,7 +14,7 @@ interface Options {
 }
 
 export function getCurrentUrl(event: Event, options?: Options) {
-  return resolveUrl(event.path, event, options);
+  return resolveUrl(event.path || event.rawPath!, event, options);
 }
 
 export function resolvePath(path: string, event: Event, options?: Options) {
