@@ -10,11 +10,11 @@ interface Options {
   basePathMap?: { [host: string]: string };
 }
 
-export function getCurrentUrl(event: Event, options: Options) {
+export function getCurrentUrl(event: Event, options?: Options) {
   return resolveUrl(event.path, event, options);
 }
 
-export function resolvePath(path: string, event: Event, options: Options) {
+export function resolvePath(path: string, event: Event, options?: Options) {
   if (path.startsWith('//') || path.startsWith('http:') || path.startsWith('https:')) {
     return path;
   }
@@ -26,7 +26,7 @@ export function resolvePath(path: string, event: Event, options: Options) {
   return getBasePath(event, options) + path;
 }
 
-export function resolveUrl(url: string, event: Event, options: Options = {}) {
+export function resolveUrl(url: string, event: Event, options?: Options) {
   if (url.startsWith('http:') || url.startsWith('https:')) {
     return url;
   }
